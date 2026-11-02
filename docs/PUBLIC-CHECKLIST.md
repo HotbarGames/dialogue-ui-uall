@@ -88,9 +88,7 @@ EOF
 - [x] (done 2026-11-02) Create a CurseForge API token (CurseForge > My Profile > API Tokens) and store it as a repository secret.
       `gh secret set` asks for the value, so it never appears in the shell history or a chat:
       `gh secret set CF_API_TOKEN -R $R`
-- [ ] Release: bump `## Version` and `CHANGELOG.md` together, commit, push, then
-      `git tag v<version> && git push origin v<version>`. Watch the run: `gh run watch -R $R`.
-      The packager uploads the zip to CurseForge and makes a GitHub release with the same zip.
+- [x] Releases: see `docs/RELEASING.md` (the dry run passed on 2026-11-02).
 
 ## 7. Check as a stranger
 
