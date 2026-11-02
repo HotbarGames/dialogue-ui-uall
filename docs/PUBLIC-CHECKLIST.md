@@ -1,7 +1,6 @@
 # Making this repository public
 
-The repository went public on 2026-11-02, for the CurseForge review. Sections 1, 2, 4, 5 and 7 are done; left are
-3 (two clicks in Settings) and 6 (once the CurseForge project has its ID). Run the commands in WSL from the repository folder,
+The repository went public on 2026-11-02, for the CurseForge review. Sections 1–7 are done. Run the commands in WSL from the repository folder,
 after `source ../.envrc` (it sets `GH_TOKEN` for the HotbarGames account). `R=HotbarGames/dialogue-ui-uall`.
 
 Going public can't really be undone: anything visible for even a minute may already be cloned or archived. So
@@ -44,9 +43,9 @@ If the approved CurseForge project got a different slug, use that one.
 
 ## 3. Manual steps in Settings (no API for these)
 
-- [ ] **Social preview**: Settings > General > Social preview > Edit > Upload an image. 1280x640 px PNG or JPG
+- [x] **Social preview**: Settings > General > Social preview > Edit > Upload an image. 1280x640 px PNG or JPG
       (at least 640x320, under 1 MB): `docs/media/social-preview.png`.
-- [ ] **Sponsor button**: Settings > General > Features > tick **Sponsorships** (uses `.github/FUNDING.yml`).
+- [x] **Sponsor button**: Settings > General > Features > tick **Sponsorships** (uses `.github/FUNDING.yml`).
 - [ ] Discussions: keep the default categories or trim them to Q&A and Ideas.
 
 ## 4. Go public
