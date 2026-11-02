@@ -83,7 +83,7 @@ EOF
 
 ## 6. Release workflow (`.github/workflows/release.yml`)
 
-- [ ] Add `## X-Curse-Project-ID: <id>` to `DialogueUI_UALL/DialogueUI_UALL.toc` (the numeric ID on the CurseForge
+- [x] Add `## X-Curse-Project-ID: <id>` to `DialogueUI_UALL/DialogueUI_UALL.toc` (done 2026-11-02: 1779758; the numeric ID on the CurseForge
       project page). Without it, the packager skips the CurseForge upload.
 - [ ] Create a CurseForge API token (CurseForge > My Profile > API Tokens) and store it as a repository secret.
       `gh secret set` asks for the value, so it never appears in the shell history or a chat:

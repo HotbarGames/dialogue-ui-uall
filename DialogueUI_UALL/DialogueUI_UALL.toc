@@ -8,6 +8,7 @@
 ## IconTexture: Interface\AddOns\DialogueUI_UALL\Logo
 ## X-Category: Localization
 ## X-License: MIT
+## X-Curse-Project-ID: 1779758
 
 Core.lua
 Window.lua
