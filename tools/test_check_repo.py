@@ -76,14 +76,19 @@ class Guard(unittest.TestCase):
     def test_budget_file_that_shrank_ok(self):
         self.write("a.lua", "x\n" * 340)
         self.budget({"a.lua": {"lines": 350}})
-        self.assertEqual(run(self.root).returncode, 0)
+        out = run(self.root)
+        self.assertEqual(out.returncode, 0)
+        self.assertIn("a.lua: shrank", out.stdout)
 
-    def test_budget_file_under_all_limits_asks_to_remove(self):
+    def test_budget_file_under_all_limits_fails_until_removed(self):
+        # A stale entry would let the file grow back to its old size, so it must go (same as the Node repos).
         self.write("a.lua", "x\n" * 10)
         self.budget({"a.lua": {"lines": 350}})
         out = run(self.root)
-        self.assertEqual(out.returncode, 0)
+        self.assertEqual(out.returncode, 1)
         self.assertIn("a.lua: now under all limits", out.stdout)
+        self.assertEqual(run(self.root, "--update").returncode, 0)
+        self.assertEqual(self.read_budget()["files"], {})
 
     def test_budget_entry_for_missing_file_fails(self):
         self.budget({"gone.lua": {"lines": 350}})

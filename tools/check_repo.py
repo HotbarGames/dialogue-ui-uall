@@ -157,7 +157,9 @@ def check(root, budget):
                 tag = " over its budget" if k in rec else ""
                 problems.append(f"{path}: {WHAT[k]}{tag} ({m[k]} > {limit})")
         if path in files and not over_limits(m):
-            notes.append(f"{path}: now under all limits; remove its entry from {BUDGET} (--update does it)")
+            problems.append(f"{path}: now under all limits; remove its entry from {BUDGET} (--update does it)")
+        elif any(k in LIMITS and m[k] < v for k, v in rec.items()):
+            notes.append(f"{path}: shrank; --update locks in the smaller numbers")
     for path in files:
         if path not in sizes:
             problems.append(f"{path}: in {BUDGET} but not a tracked, size-checked file; remove its entry "
