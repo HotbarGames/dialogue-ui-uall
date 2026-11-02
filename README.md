@@ -13,7 +13,7 @@ so with both enabled the quest window stayed in English. This small bridge addon
 Ukrainian text into Dialogue UI. It has no translations of its own: every word comes from UALL Forever, and
 what UALL Forever doesn't have stays English.
 
-[▶ Video (Ukrainian, 18 s)](docs/media/short-ua.mp4) · [longer explainer (53 s)](docs/media/promo-ua.mp4)
+[▶ Video (Ukrainian, 19 s)](docs/media/short-ua.mp4) · [longer explainer (53 s)](docs/media/promo-ua.mp4)
 
 ## Install
 

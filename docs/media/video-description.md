@@ -2,7 +2,7 @@
 
 Two videos, rendered from the private video project:
 
-- **The short** (`short-ua.mp4` here, 18 s, 1080x1920): the main one, for TikTok, YouTube Shorts and Instagram Reels,
+- **The short** (`short-ua.mp4` here, 19 s, 1080x1920): the main one, for TikTok, YouTube Shorts and Instagram Reels,
   and the one the READMEs link. Cover: `short-cover.png`.
 - **The explainer** (`promo-ua.mp4` here, 53 s, 16:9): for a normal YouTube video. There is also a version with the
   UALL voice line, published only after the UALL team says yes (their audio).
