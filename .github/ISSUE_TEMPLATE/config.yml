@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Wrong or missing Ukrainian text / Неправильний або відсутній переклад
+    url: https://www.curseforge.com/wow/addons/uall-forever-ukrainian-localization
+    about: >-
+      Every Ukrainian word comes from UALL Forever. If a translation itself is wrong or missing, tell the UALL
+      team (their Discord is on that page). Only report here what Dialogue UI shows wrong.
+      Усі переклади беруться з UALL Forever: помилки в самому перекладі — команді UALL (їхній Discord є на цій сторінці).
+  - name: Security problem / Проблема безпеки
+    url: https://github.com/HotbarGames/dialogue-ui-uall/security/advisories/new
+    about: Report privately, not in a public issue. / Повідомте приватно, не в публічній issue.

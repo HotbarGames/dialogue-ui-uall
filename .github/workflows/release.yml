@@ -1,0 +1,42 @@
+# Packages the addon with the BigWigs packager (https://github.com/BigWigsMods/packager) when a version tag
+# (v1.0.1, ...) is pushed: builds DialogueUI_UALL-<tag>.zip from .pkgmeta, uploads it to CurseForge and attaches it
+# to a GitHub release for the tag.
+#
+# Before the first tagged release:
+#   1. The CurseForge project must exist and be approved. Add its numeric ID to
+#      DialogueUI_UALL/DialogueUI_UALL.toc as `## X-Curse-Project-ID: <id>`. Without it the packager still builds
+#      the zip and makes the GitHub release, but skips the CurseForge upload.
+#   2. Add the repository secret CF_API_TOKEN (CurseForge > My Profile > API Tokens).
+#   3. Bump `## Version` in the TOC and DialogueUI_UALL/CHANGELOG.md together, commit, then tag that commit.
+# GITHUB_TOKEN is GitHub's own per-run token; nothing to set up.
+name: release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # the packager creates the GitHub release and uploads the zip to it
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0          # the packager reads tags and history for the version and changelog
+          persist-credentials: false
+
+      - name: Package and upload
+        uses: BigWigsMods/packager@e50a250f8705041e40f2fa1ddcb280a686d65aa0 # v2.6.1
+        with:
+          pandoc: "false"         # only needed for WoWInterface uploads
+        env:
+          CF_API_KEY: ${{ secrets.CF_API_TOKEN }}
+          GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}

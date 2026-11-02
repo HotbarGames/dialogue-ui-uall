@@ -1,0 +1,13 @@
+Logo made with Codex (WSL, built-in image tool), 2026-11-02.
+Run from this folder: codex exec --skip-git-repo-check -s workspace-write -c model_reasoning_effort="low" "<prompt>" -i <ref> < /dev/null
+
+1) A 4x4 sheet of 16 numbered concepts (quest parchment/dialogue shown in Ukrainian, English -> Ukrainian), each in
+   the hand-painted WoW icon style with azure #0057B7 and golden yellow #FFD700 accents, no reference image. The
+   owner chose concept 4 ("!" with a blue-yellow scarf over a parchment), cropped to refs/chosen-variant-4.png.
+   (The sheet itself is kept outside the repo.)
+
+2) logo-1024.png (final, -i refs/chosen-variant-4.png):
+Create ONE square image, 1024x1024, saved as logo-1024.png in the current directory (overwrite it). Redraw the attached icon as a clean, polished final app icon for the World of Warcraft addon "Dialogue UI - UALL" (shows quest dialogue text in Ukrainian): a big glowing golden quest exclamation mark (the WoW quest-giver marker) with a blue-and-yellow scarf/ribbon tied around its middle, standing over an unrolled parchment quest page with a few lines of text. Keep the same design and hand-painted WoW game-icon style; colours: gold, azure blue #0057B7, golden yellow #FFD700, warm parchment. Remove the small number from the reference. Composition: centred, the whole icon fills about 88 percent of the canvas, exclamation mark large and dominant so it reads at 32x32 px. Background: one perfectly flat uniform pure black (#000000), no texture or vignette; only a soft glow right around the exclamation mark. No text, no border, no extra objects.
+
+Then (WSL): python3 make_icons.py -> logo-400.png (CurseForge avatar), logo-256.png, logo-transparent-256.png,
+../../DialogueUI_UALL/Logo.tga (64x64 in-game icon).

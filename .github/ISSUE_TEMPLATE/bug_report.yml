@@ -1,0 +1,112 @@
+name: Bug report / Помилка
+description: Dialogue UI shows something wrong with this addon on. / Dialogue UI показує щось не так із цим аддоном.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. This addon has no translations of its own: if a Ukrainian text is wrong or missing in
+        UALL Forever itself, please tell the UALL team instead (link on the "New issue" page).
+        Дякуємо! Аддон не має власних перекладів: помилки в самому перекладі — команді UALL Forever.
+
+        **Privacy / Приватність:** WoW paths contain your account folder (`WTF\Account\<ACCOUNT>\`). Replace it with
+        `<ACCOUNT>`, and leave character and realm names out of text and screenshots if you prefer.
+        Замініть назву теки акаунта на `<ACCOUNT>`; імена персонажа й сервера можна не показувати.
+
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened? / Що сталося?
+      description: What you did, what you saw, what you expected. Quest name or ID if you know it. / Що робили, що побачили, чого чекали; назва чи ID завдання.
+    validations:
+      required: true
+
+  - type: input
+    id: wow
+    attributes:
+      label: WoW Forever build / Версія WoW Forever
+      description: Shown at the bottom left of the login screen. / Унизу ліворуч на екрані входу.
+      placeholder: "1.60.1.70707"
+    validations:
+      required: true
+
+  - type: input
+    id: ours
+    attributes:
+      label: Dialogue UI - UALL version / Версія Dialogue UI - UALL
+      description: The first line of `/duall`, or the AddOns list. / Перший рядок `/duall` або список аддонів.
+      placeholder: "1.0.0"
+    validations:
+      required: true
+
+  - type: input
+    id: dui
+    attributes:
+      label: Dialogue UI version / Версія Dialogue UI
+      placeholder: "1.0.6"
+    validations:
+      required: true
+
+  - type: input
+    id: uallf
+    attributes:
+      label: UALL Forever version / Версія UALL Forever
+      placeholder: "1.0.10"
+    validations:
+      required: true
+
+  - type: textarea
+    id: duall
+    attributes:
+      label: "`/duall` output / Вивід `/duall`"
+      description: Type `/duall` in chat and copy the lines (or attach a screenshot). / Наберіть `/duall` у чаті й скопіюйте рядки (або скриншот).
+      render: text
+    validations:
+      required: true
+
+  - type: textarea
+    id: duall-test
+    attributes:
+      label: "`/duall test` output / Вивід `/duall test`"
+      description: With the problem quest window open, type `/duall test`. / Відкрийте вікно завдання з проблемою й наберіть `/duall test`.
+      render: text
+
+  - type: textarea
+    id: savedvariables
+    attributes:
+      label: SavedVariables file / Файл SavedVariables
+      description: |
+        After `/reload` or logging out, attach this file (drag it here). It holds the addon's last lookups, errors and untranslated English NPC lines (these can contain your character's name).
+        Після `/reload` або виходу прикріпіть цей файл (перетягніть сюди). У ньому останні запити, помилки й неперекладені англійські репліки NPC (там може бути ім'я персонажа).
+        `World of Warcraft\_forever_\WTF\Account\<ACCOUNT>\SavedVariables\DialogueUI_UALL.lua`
+      placeholder: Drop the file here (rename it to .txt if GitHub refuses .lua) or paste its text. / Перетягніть файл (якщо .lua не приймає, перейменуйте на .txt) або вставте текст.
+
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: Screenshot / Скриншот
+      description: The Dialogue UI window with the problem (Print Screen; files are in `_forever_\Screenshots\`). / Вікно Dialogue UI з проблемою.
+    validations:
+      required: true
+
+  - type: textarea
+    id: errors
+    attributes:
+      label: Lua errors / Помилки Lua (optional / необов'язково)
+      description: From BugSack, or after `/console scriptErrors 1`. / З BugSack або після `/console scriptErrors 1`.
+      render: text
+
+  - type: textarea
+    id: other-addons
+    attributes:
+      label: Other addons / Інші аддони (optional / необов'язково)
+      description: Quest or dialogue addons especially (QuickQuest, DialogKey, Immersion…). / Особливо аддони для завдань і діалогів.
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks / Перевірки
+      options:
+        - label: I use the latest versions of all three addons. / У мене останні версії всіх трьох аддонів.
+          required: true
+        - label: The same text is wrong without Dialogue UI too (then it is a UALL Forever issue). / Цей самий текст неправильний і без Dialogue UI (тоді це до UALL Forever).

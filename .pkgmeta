@@ -1,0 +1,32 @@
+# CurseForge / BigWigs packager (https://github.com/BigWigsMods/packager).
+# The addon lives in DialogueUI_UALL/; move it up so the zip holds DialogueUI_UALL/DialogueUI_UALL.toc
+# and the addon's files only.
+package-as: DialogueUI_UALL
+
+move-folders:
+  DialogueUI_UALL/DialogueUI_UALL: DialogueUI_UALL
+
+required-dependencies:
+  - dialogueui
+  - uall-forever-ukrainian-localization
+
+# shown on the Relations tab, not installed automatically (the voice is a separate choice)
+optional-dependencies:
+  - uall-forever-ukrainian-quest-voiceover-levels-140
+
+manual-changelog:
+  filename: DialogueUI_UALL/CHANGELOG.md
+  markup-type: markdown
+
+ignore:
+  - docs
+  - tools
+  - install.bat
+  - README.md
+  - README.uk.md
+  - CLAUDE.md
+  - .gitignore
+  - .gitattributes
+  - .github
+  - SECURITY.md
+  - LICENSE
