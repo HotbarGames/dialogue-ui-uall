@@ -1,7 +1,7 @@
 # Making this repository public
 
 The repository is private until the addon works in WoW Forever and is published on CurseForge. This file lists the
-steps for that day, in order. Only section 1 has been done. Run the commands in WSL from the repository folder,
+steps for that day, in order. Public since 2026-11-02: sections 1, 2, 4, 5 and 7 are done; 3 (two clicks in Settings) and 6 (after the CurseForge project exists) are left. Run the commands in WSL from the repository folder,
 after `source ../.envrc` (it sets `GH_TOKEN` for the HotbarGames account). `R=HotbarGames/dialogue-ui-uall`.
 
 Going public can't really be undone: anything visible for even a minute may already be cloned or archived. So
