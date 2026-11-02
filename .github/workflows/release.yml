@@ -1,19 +1,19 @@
 # Packages the addon with the BigWigs packager (https://github.com/BigWigsMods/packager) when a version tag
-# (v1.0.1, ...) is pushed: builds DialogueUI_UALL-<tag>.zip from .pkgmeta, uploads it to CurseForge and attaches it
-# to a GitHub release for the tag.
+# (v1.0.1, ...) is pushed: builds DialogueUI_UALL-<tag>.zip from .pkgmeta, uploads it to CurseForge (project
+# 1779758, game type Forever, game versions from the TOC's ## Interface) and attaches it to a GitHub release.
 #
-# Before the first tagged release:
-#   1. The CurseForge project must exist and be approved. Add its numeric ID to
-#      DialogueUI_UALL/DialogueUI_UALL.toc as `## X-Curse-Project-ID: <id>`. Without it the packager still builds
-#      the zip and makes the GitHub release, but skips the CurseForge upload.
-#   2. Add the repository secret CF_API_TOKEN (CurseForge > My Profile > API Tokens).
-#   3. Bump `## Version` in the TOC and DialogueUI_UALL/CHANGELOG.md together, commit, then tag that commit.
-# GITHUB_TOKEN is GitHub's own per-run token; nothing to set up.
+# Dry run (uploads nothing): Actions > release > Run workflow, or `gh workflow run release.yml`. It checks that the
+# CF_API_TOKEN secret is accepted, that CurseForge lists the TOC's Forever versions, and builds the zip.
+#
+# Setup (done 2026-11-02): `## X-Curse-Project-ID: 1779758` in DialogueUI_UALL/DialogueUI_UALL.toc and the
+# repository secret CF_API_TOKEN (CurseForge > My Profile > API Tokens). GITHUB_TOKEN is GitHub's own per-run token.
+# Release: bump `## Version` in the TOC and DialogueUI_UALL/CHANGELOG.md together, commit, push, then tag that commit.
 name: release
 
 on:
   push:
     tags: ["v*"]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -24,6 +24,7 @@ concurrency:
 
 jobs:
   package:
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     permissions:
       contents: write   # the packager creates the GitHub release and uploads the zip to it
@@ -37,6 +38,50 @@ jobs:
         uses: BigWigsMods/packager@e50a250f8705041e40f2fa1ddcb280a686d65aa0 # v2.6.1
         with:
           pandoc: "false"         # only needed for WoWInterface uploads
+          # file and label without the "-forever" suffix the packager adds for non-retail game types:
+          # the addon is Forever-only
+          args: -n "{package-name}-{project-version}:{project-version}"
         env:
           CF_API_KEY: ${{ secrets.CF_API_TOKEN }}
           GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
+
+  dry-run:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: CurseForge token and Forever game versions
+        env:
+          CF_API_KEY: ${{ secrets.CF_API_TOKEN }}
+        run: |
+          set -euo pipefail
+          [ -n "$CF_API_KEY" ] || { echo "::error::the CF_API_TOKEN secret is missing"; exit 1; }
+          code=$(curl -s -o versions.json -w '%{http_code}' -H "x-api-token: $CF_API_KEY" \
+            https://wow.curseforge.com/api/game/wow/versions)
+          if [ "$code" != 200 ] || grep -q errorMessage versions.json; then
+            echo "::error::CurseForge refused the token (HTTP $code)"; exit 1
+          fi
+          echo "Token accepted. Forever versions on CurseForge (game type 88568):"
+          jq -r 'map(select(.gameVersionTypeID == 88568)) | sort_by(.id) | .[].name' versions.json | sed 's/^/  /'
+          # the TOC's interface numbers, as the packager turns them into versions (16001 -> 1.60.1)
+          for i in $(sed -n 's/^## Interface:\s*//p' DialogueUI_UALL/DialogueUI_UALL.toc | tr -d '\r' | tr ',' ' '); do
+            v="$((i / 10000)).$((i / 100 % 100)).$((i % 100))"
+            if jq -e --arg v "$v" 'map(select(.gameVersionTypeID == 88568 and .name == $v)) | length > 0' versions.json >/dev/null; then
+              echo "TOC interface $i -> $v: listed"
+            else
+              echo "::warning::TOC interface $i -> $v is not listed for Forever yet; the upload would use the nearest lower version"
+            fi
+          done
+
+      - name: Package without uploading
+        uses: BigWigsMods/packager@e50a250f8705041e40f2fa1ddcb280a686d65aa0 # v2.6.1
+        with:
+          pandoc: "false"
+          args: -d -n "{package-name}-{project-version}:{project-version}"
+
+      - name: What the zip would contain
+        run: for z in .release/*.zip; do echo "$z"; unzip -l "$z"; done
