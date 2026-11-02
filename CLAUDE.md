@@ -17,6 +17,14 @@ UALL Forever's translations. Maintainer notes for this machine (paths, test runn
 - Release: bump `## Version` in the TOC and `DialogueUI_UALL/CHANGELOG.md` together; `python3 tools/make_zip.py`;
   steps in `docs/UPLOAD.md`. Viewer-facing Ukrainian must be natural and never evoke Russia.
 
+## File size
+
+- New files: at most 300 lines, 25,000 bytes, 400 characters per line. Files already bigger are listed in
+  `size-budget.json`; their numbers may only go down (`python3 tools/check_repo.py --update` records a shrink).
+- A file that needs more room gets split by topic, never a raised number in `size-budget.json`.
+- Never commit `.claude/`, `.mcp.json` or `CLAUDE.local.md` (the repo is public).
+- Check and its tests: `python3 -m unittest discover -s tools` (also runs in CI, `.github/workflows/check.yml`).
+
 <!-- claude-config:dependency-safety START (managed by claude-config; do not edit between the markers — claude-sync.sh keeps this block in step across projects) -->
 ## Dependency safety (supply-chain)
 

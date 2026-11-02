@@ -1,0 +1,23 @@
+# File size ratchet and claude-config leak guard (tools/check_repo.py) plus its own tests.
+# Same command as locally: python3 -m unittest discover -s tools
+name: check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: File size and leak guard
+        run: python3 -m unittest discover -s tools -v

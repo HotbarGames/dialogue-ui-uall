@@ -25,6 +25,7 @@ ignore:
   - README.md
   - README.uk.md
   - CLAUDE.md
+  - size-budget.json
   - .gitignore
   - .gitattributes
   - .github

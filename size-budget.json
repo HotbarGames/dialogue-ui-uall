@@ -1,0 +1,26 @@
+{
+  "files": {
+    "DialogueUI_UALL/Core.lua": {
+      "lines": 466
+    },
+    "DialogueUI_UALL/Window.lua": {
+      "lines": 456
+    },
+    "docs/logo/prompt.txt": {
+      "maxLine": 949
+    },
+    "docs/research-curseforge.md": {
+      "maxLine": 924
+    },
+    "docs/research-dui-hooks.md": {
+      "lines": 572,
+      "bytes": 45252,
+      "maxLine": 900
+    },
+    "docs/research-uallf-oracles.md": {
+      "lines": 323,
+      "bytes": 25904
+    }
+  },
+  "ignore": []
+}
