@@ -2,7 +2,7 @@
 ## Title: Dialogue UI - UALL
 ## Notes: Dialogue UI's quest and NPC window in Ukrainian, with UALL Forever's translations. No setup needed.
 ## Author: HotbarGames
-## Version: 1.0.0
+## Version: 1.0.1
 ## Dependencies: DialogueUI, UALLF
 ## SavedVariables: DialogueUI_UALL_DB
 ## IconTexture: Interface\AddOns\DialogueUI_UALL\Logo

@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.1
+
+- Fixed: quest names in the NPC's list stayed English on Forever. Dialogue UI shows the quest's level in front
+  of the name (or blank space until the level is known), so the name wasn't found in UALL Forever. Now the
+  name is looked up without the level, and the level stays as Dialogue UI shows it.
+
+**Українською:** виправлено: назви завдань у списку NPC лишалися англійською на Forever. Dialogue UI пише перед
+назвою рівень завдання (або порожнє місце, поки рівень не відомий), тож UALL Forever не впізнавав назву. Тепер
+назва шукається без рівня, а рівень лишається таким, як його показує Dialogue UI.
+
 ## 1.0.0
 
 - Quest title, description, objectives, progress and completion from UALL Forever shown in

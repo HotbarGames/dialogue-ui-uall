@@ -95,9 +95,7 @@ end
 -- Answers found (never misses) for this NPC window; wiped when it closes or UALLF settings change.
 local cache, cacheSig = {}, nil
 
-local function Wipe(t)
-    for k in pairs(t) do t[k] = nil end
-end
+local function Wipe(t) for k in pairs(t) do t[k] = nil end end
 
 local function SettingsSig()
     local s = _G.UALLFSettingsDB
@@ -189,12 +187,14 @@ local function OptionText(name)
     return (prefix or "") .. ua
 end
 
--- A quest in an NPC's list, by its English name. UALLF's bag lookup checks UI strings and NPC
--- names before quest titles; such a hit is not the quest's own title, so keep the English then.
+-- A quest in an NPC's list, by English name; on Forever after its level ("|cffe9c21b30|r  ", spaces until cached), kept.
+-- UALLF's bag lookup checks UI strings and NPC names before quest titles: such a hit isn't the quest's own, keep English.
 local function ListTitle(name)
-    local ua = UA("title", name)
-    if ua and (Same(ua, UA("label", name, true)) or Same(ua, UA("npc", name, true))) then return nil end
-    return ua
+    local lead, en = name:match("^(|c%x%x%x%x%x%x%x%x%[?%d+%]?|r%s+)(.+)$")
+    if not lead then lead, en = name:match("^(%s*)(.-)$") end
+    local ua = UA("title", en)
+    if ua and (Same(ua, UA("label", en, true)) or Same(ua, UA("npc", en, true))) then return nil end
+    return ua and lead .. ua
 end
 
 -- Buttons: reply options, quests in an NPC's list, Accept/Decline/Continue/Complete/Goodbye...
